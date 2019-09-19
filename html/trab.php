@@ -11,6 +11,7 @@
 </head>
 
 <?php
+//nuevo comentario
 $servername = "localhost";
 $username = "root";
 $password = "1234";
