@@ -29,6 +29,12 @@ if ($conn->connect_error) {
   $respt= mysqli_query($conn,"SELECT * FROM c_nivel2");
   $numero1 = $respt->num_rows;
 $cont=1; 
+//de prueba
+$rest= mysqli_query($conn,"SELECT MAX(nivel1_id) FROM c_nivel1;");
+$resultadof=mysqli_fetch_array($rest);
+$numero1 = intval($resultadof['MAX(nivel1_id)']);
+
+
   $conn->close();
 ?>
 
@@ -75,11 +81,11 @@ $cont=1;
                     $resultado=mysqli_fetch_array($res);
                     $sql = mysqli_data_seek($res,$contador);
     echo "<tr class='tablacontenido'>";  
-    echo "<td>".$resultado['nivel1_id']."</td>";  
+    echo "<td>".$contador."</td>";  
     echo "<td>".utf8_encode($resultado['nivel1_nombre'])."</td>";  
     echo "<td>".$resultado['nivel1_tipo']."</td>";  
     echo "<td>".'<a href="#popup1"> <button value="editar'.$contador.'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
-    echo "<td>".'<form action="../php/eliminar.php" method="post"><button value="eliminar'.$contador.'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
+    echo "<td>".'<form action="../php/eliminar.php" method="post"><button value="eliminar'.$resultado['nivel1_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
     echo "</tr>";  
     $contador++;
 } ?> 
@@ -100,7 +106,7 @@ $cont=1;
                    <label for="inputnombre">Nombre:</label>
                                 </td>
                        <td> 
-                    <input type="text" id="inputnombre" name="ipn" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{4,30}" title="solo puede ingresar texto, de entre 4 y 30 caracteres" required >
+                    <input type="text" id="inputnombre" name="ipn" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" required >
                     </td>
                     </tr>
                     
@@ -136,7 +142,7 @@ $cont=1;
                          } 
                         ?>
                     </datalist>           
-                    <input type="text" list="addpueblo"  name="pyn" id="Inputnombre2" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{4,30}" title="solo puede ingresar texto, de entre 4 y 30 caracteres" disabled  autocomplete="off" >
+                    <input type="text" list="addpueblo"  name="pyn" id="Inputnombre2" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" disabled  autocomplete="off" >
                     <br><br>
                     <button type="submit">Guardar</button>
                 </form>
@@ -157,7 +163,7 @@ $cont=1;
                        <label for="inputNombre">Nombre:</label>
                        </td> 
                        <td>
-                        <input type="text" id="InputNombre" name="editname" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{4,30}" title="solo puede ingresar texto, de entre 4 y 30 caracteres" required>
+                        <input type="text" id="InputNombre" name="editname" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" required>
                         </td>
                         </tr>
                         <br><br>

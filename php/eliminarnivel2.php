@@ -15,8 +15,11 @@ if ($conn->connect_error) {
 $res= mysqli_query($conn,"select * from c_nivel2;");
 $sql = mysqli_data_seek($res,11);
 $resultado=mysqli_fetch_array($res);
-$numero = $res->num_rows;
+//$numero = $res->num_rows;
 $contador=1;
+$rest= mysqli_query($conn,"SELECT MAX(nivel2_id) FROM c_nivel2;");
+$resultadof=mysqli_fetch_array($rest);
+$numero = intval($resultadof['MAX(nivel2_id)']);
 
 //funcion para eliminar registros de una basede datos
 $refresh="alter table c_nivel2 auto_increment=1;";//estalinea es para que empieze desdeel menor numero existente el conteodel id

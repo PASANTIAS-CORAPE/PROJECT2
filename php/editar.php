@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 
 //variables  para capturar  info de losformularios
   // Escape user inputs for security
-  $nombre = mysqli_real_escape_string($conn, $_REQUEST['editname']);
+  $nombre = utf8_decode($_REQUEST['editname']);
   $tipo = mysqli_real_escape_string($conn, $_REQUEST['editkind']);
   $quedit=$_POST['valedit'];
  
@@ -21,12 +21,11 @@ if ($conn->connect_error) {
 $res= mysqli_query($conn,"select * from c_nivel1;");
 $sql = mysqli_data_seek($res,11);
 $resultado=mysqli_fetch_array($res);
-$numero = $res->num_rows;
+//$numero = $res->num_rows;
 $contador=1;
-
-
-
-
+$rest= mysqli_query($conn,"SELECT MAX(nivel1_id) FROM c_nivel1;");
+$resultadof=mysqli_fetch_array($rest);
+$numero = intval($resultadof['MAX(nivel1_id)']);
 //funcion para eliminar registros de una basede datos
 //$refresh="alter table c_nivel1 auto_increment=1;";
 
@@ -39,7 +38,6 @@ $contador=1;
 
   if(mysqli_query($conn,$mod)){
     header('Location:  ../html/trab.php');
-    
 } else{
     echo "ERROR: Could not able to execute $mod. " . mysqli_error($conn);
 }

@@ -74,12 +74,12 @@ if ($conn->connect_error) {
                     $resultado=mysqli_fetch_array($res);
                     $sql = mysqli_data_seek($res,$contador);
     echo "<tr class='tablacontenido'>";  
-    echo "<td>".$resultado['nivel2_id']."</td>";  
+    echo "<td>".$contador."</td>";  
     echo "<td>".utf8_encode($resultado['nivel2_nombre'])."</td>";  
     echo "<td>".$resultado['nivel2_tipo']."</td>";  
     echo "<td>".$resultado['nivel1_id']."</td>";  
     echo "<td>".'<a href="#popup1"> <button value="editar'.$contador.'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
-    echo "<td>".'<form action="../php/eliminarnivel2.php" method="post"><button value="eliminar'.$contador.'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
+    echo "<td>".'<form action="../php/eliminarnivel2.php" method="post"><button value="eliminar'.$resultado['nivel2_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
     echo "</tr>";  
     $contador++;
 } ?> 
@@ -101,7 +101,7 @@ if ($conn->connect_error) {
                    <label for="inputnombre">Nombre:</label>
                                 </td>
                        <td> 
-                    <input type="text" id="inputnombre" name="ipn" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{4,30}" title="solo puede ingresar texto, de entre 4 y 30 caracteres" required>
+                    <input type="text" id="inputnombre" name="ipn" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" required>
                     </td>
                     </tr>
                     
@@ -118,6 +118,7 @@ if ($conn->connect_error) {
             echo "<option>".utf8_encode($resultado1['nivel1_nombre'])."</option>";             
             $cont++;
         } 
+        $cont=0;
                         ?>
                     </select>
                     </td>
@@ -144,10 +145,26 @@ if ($conn->connect_error) {
                        <label for="inputNombre">Nombre:</label>
                        </td> 
                        <td>
-                        <input type="text" id="InputNombre" name="editname" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{4,30}" title="solo puede ingresar texto, de entre 4 y 30 caracteres" required>
+                        <input type="text" id="InputNombre" name="editname" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" required>
                         </td>
                         </tr>
-                        
+                        <tr>
+                        <td>
+                       <label>Nacionalidad/Pueblo:</label>
+                       </td>                                       
+                        <td>
+                        <select name="cambio" id="inputTipo">
+                        <?php
+                        while ($cont <= $numero1){   
+                            $resultado1=mysqli_fetch_array($respt);
+                            $sql1 = mysqli_data_seek($respt,$cont);
+            echo "<option value='$resultado1[nivel1_id]'>".utf8_encode($resultado1['nivel1_nombre'])."</option>";             
+            $cont++;
+        } 
+                        ?>
+                        </select>
+                        </td>
+                        </tr>
                     </table>
                     </center>
                         <br><br>

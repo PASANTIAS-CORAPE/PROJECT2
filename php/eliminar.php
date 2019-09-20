@@ -13,15 +13,18 @@ if ($conn->connect_error) {
   } 
 //datosparalaconsulta y eliminaciion
 $res= mysqli_query($conn,"select * from c_nivel1;");
-$sql = mysqli_data_seek($res,11);
+$rest= mysqli_query($conn,"SELECT MAX(nivel1_id) FROM c_nivel1;");
+//$sql = mysqli_data_seek($res,11);
 $resultado=mysqli_fetch_array($res);
-$numero = $res->num_rows;
+$resultadof=mysqli_fetch_array($rest);
+$numero = intval($resultadof['MAX(nivel1_id)']);
 $contador=1;
-
+echo $numero;
+echo$_POST['eliminar'];
+//$res->num_rows
 //funcion para eliminar registros de una basede datos
 $refresh="alter table c_nivel1 auto_increment=1;";//estalinea es para que empieze desdeel menor numero existente el conteodel id
-
-while ($contador <= $numero) {
+while ($contador <= $numero+1) {
   switch ($_POST['eliminar']) {
   case 'eliminar'.$contador:
   $eliminar="delete from c_nivel1 where nivel1_id=".$contador.";";
