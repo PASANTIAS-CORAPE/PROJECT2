@@ -39,7 +39,7 @@ $idnivel2=$numero+1;
             echo '<script>
             alert("Registro guardado con exito");
            </script>'; 
-           header('Location: ../html/trab.php');
+           header('Location: ../Vista/html/trab.php');
           } else{
               echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
           } 
@@ -49,7 +49,7 @@ $idnivel2=$numero+1;
           echo '<script>
           alert("Registro guardado con éxito");
          </script>'; 
-            header('Location: ../html/trab.php');
+            header('Location: ../Vista/html/trab.php');
         } else{
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
         }
@@ -59,7 +59,7 @@ $idnivel2=$numero+1;
           echo '<script>
           alert("Registro guardado con éxito");
          </script>'; 
-            header('Location: ../html/trab.php');
+            header('Location: ../Vista/html/trab.php');
         } else{
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
         }

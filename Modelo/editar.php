@@ -37,7 +37,7 @@ $numero = intval($resultadof['MAX(nivel1_id)']);
   $mod = "UPDATE c_nivel1 SET nivel1_nombre = '$nombre' , nivel1_tipo = '$tipo' WHERE nivel1_id = '$contador'";
 
   if(mysqli_query($conn,$mod)){
-    header('Location:  ../html/trab.php');
+    header('Location:  ../Vista/html/trab.php');
 } else{
     echo "ERROR: Could not able to execute $mod. " . mysqli_error($conn);
 }

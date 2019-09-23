@@ -43,20 +43,20 @@ echo $resultado['nivel1_id'];
 if ($newnacpue != "") {
   if ($newnacpue != $resultado['nivel1_id']) {
     if(mysqli_query($conn,$mod1)){
-      header('Location:  ../html/trab2.php');
+      header('Location:  ../Vista/html/trab2.php');
       } else{
       echo "ERROR: Could not able to execute $mod. " . mysqli_error($conn);
       }
   } else {
     if(mysqli_query($conn,$mod)){
-      header('Location:  ../html/trab2.php');
+      header('Location:  ../Vista/html/trab2.php');
       } else{
       echo "ERROR: Could not able to execute $mod. " . mysqli_error($conn);
       }
   } 
 } else {
   echo "<script>alert('No puedes editar sin nacionalidad o pueblo');
-  window.location.href='../html/trab2.php';
+  window.location.href='../Vista/html/trab2.php';
   </script>";
 }
     

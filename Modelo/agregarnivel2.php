@@ -5,6 +5,7 @@ $password = "1234";
 $database = "nuevo";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$database);
+mysqli_query($conn,"SET NAMES 'UTF-8'");
 if ($conn->connect_error) {
     die("ERROR: No se puede conectar al servidor: " . $conn->connect_error);
   } 
@@ -14,6 +15,7 @@ if ($conn->connect_error) {
 //para insertar info
   // Escape user inputs for security
   $nombre = mysqli_real_escape_string($conn, $_REQUEST['ipn']);
+  $n2nombre = utf8_decode($_REQUEST['ipn']);
   $tipo = utf8_decode($_REQUEST['ipt']);
   $n2tipo="Pueblo";
   $res= mysqli_query($conn,"select * from c_nivel2;");
@@ -29,7 +31,7 @@ if ($conn->connect_error) {
     echo '<script>
     alert("Registro guardado con exito");
    </script>'; 
-      header('Location: ../html/trab2.php');
+      header('Location: ../Vista/html/trab2.php');
   } else{
       echo "ERROR: Could not able to execute $subnivel. " . mysqli_error($conn);
   }

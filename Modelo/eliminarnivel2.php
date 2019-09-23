@@ -32,7 +32,7 @@ while ($contador <= $numero) {
    echo '<script>
    alert("Registro eliminado con exito");
   </script>';
-  header('Location: ../html/trab2.php');
+  header('Location: ../Vista/html/trab2.php');
   break;
   }
   $contador++;

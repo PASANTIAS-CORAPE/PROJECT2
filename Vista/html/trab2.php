@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../../Modelo/jquery-2.1.4.js"></script>
     <link rel="stylesheet" href="../css/estilo.css">
     <title>CORAPE</title>
 </head>
@@ -79,7 +79,7 @@ if ($conn->connect_error) {
     echo "<td>".$resultado['nivel2_tipo']."</td>";  
     echo "<td>".$resultado['nivel1_id']."</td>";  
     echo "<td>".'<a href="#popup1"> <button value="editar'.$contador.'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
-    echo "<td>".'<form action="../php/eliminarnivel2.php" method="post"><button value="eliminar'.$resultado['nivel2_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
+    echo "<td>".'<form action="../../Modelo/eliminarnivel2.php" method="post"><button value="eliminar'.$resultado['nivel2_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
     echo "</tr>";  
     $contador++;
 } ?> 
@@ -94,7 +94,7 @@ if ($conn->connect_error) {
                 <h2>Añadir contenido</h2>
                 <a id="cerrar" href="#">&times;</a>
                 <div class="popupContent">
-                    <form action="../php/agregarnivel2.php" method="POST" >
+                    <form action="../../Modelo/agregarnivel2.php" method="POST" >
                         <table>
                             <tr>
                                 <td>
@@ -136,7 +136,7 @@ if ($conn->connect_error) {
                     <h2>Editar contenido</h2>
                     <a id="cerrar" href="#">&times;</a>
                     <div class="popupContent">
-                        <form action="../php/editarnivel2.php" method="post">
+                        <form action="../../Modelo/editarnivel2.php" method="post">
                         <input type="text"  id="editdatos" name="valedit" style="display:none">
                         <center>
                             <table>
@@ -175,7 +175,6 @@ if ($conn->connect_error) {
              </div>
 
 </body>
-<script src="../js/archivo.js"></script>
-<script src="../js/buscar.js"></script>
+<script src="../../Modelo/buscar.js"></script>
 
 </html>

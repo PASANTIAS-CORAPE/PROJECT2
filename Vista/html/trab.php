@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-type" content="text/html">
-    <script src="../js/jquery-2.1.4.js"></script>
+    <script src="../../Modelo/jquery-2.1.4.js"></script>
     <link rel="stylesheet" href="../css/estilo.css">
     <title>Document</title>
 </head>
@@ -85,7 +85,7 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
     echo "<td>".utf8_encode($resultado['nivel1_nombre'])."</td>";  
     echo "<td>".$resultado['nivel1_tipo']."</td>";  
     echo "<td>".'<a href="#popup1"> <button value="editar'.$contador.'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
-    echo "<td>".'<form action="../php/eliminar.php" method="post"><button value="eliminar'.$resultado['nivel1_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
+    echo "<td>".'<form action="../../Modelo/eliminar.php" method="post"><button value="eliminar'.$resultado['nivel1_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
     echo "</tr>";  
     $contador++;
 } ?> 
@@ -99,7 +99,7 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
                 <h2>Añadir contenido</h2>
                 <a id="cerrar" href="#">&times;</a>
                 <div class="popupContent">
-                    <form action="../php/agregar.php" method="POST" >
+                    <form action="../../Modelo/Agregar.php" method="POST" >
                         <table>
                             <tr>
                                 <td>
@@ -155,7 +155,7 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
                     <h2>Editar contenido</h2>
                     <a id="cerrar" href="#">&times;</a>
                     <div class="popupContent">
-                        <form action="../php/editar.php" method="post">
+                        <form action="../../Modelo/editar.php" method="post">
                         <input type="text"  id="editdatos" name="valedit" style="display:none">
                             <table>
                                 <tr>
@@ -189,6 +189,5 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
 
 
 </body>
-<script src="../js/archivo.js"></script>
-<script src="../js/buscar.js"></script>
+<script src="../../Modelo/buscar.js"></script>
 </html>

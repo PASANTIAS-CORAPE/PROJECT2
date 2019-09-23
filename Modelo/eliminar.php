@@ -38,7 +38,7 @@ while ($contador <= $numero+1) {
    echo '<script>
    alert("Registro eliminado con exito");
   </script>';
-  header('Location: ../html/trab.php');
+  header('Location: ../Vista/html/trab.php');
   break;
   }
   $contador++;
