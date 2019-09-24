@@ -49,7 +49,7 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
     <center>
     <div id="cuerpo"> 
     <a href="#popup"><input type="button" name="Añadir" id="Añadir" value="Añadir" ></a>&emsp;&emsp;
-    <a href="trab2.php"><input type="button" id="Añadir" value="Nivel  2" ></a>&emsp;&emsp;
+    <a href="nivel2.php"><input type="button" id="Añadir" value="Nivel  2" ></a>&emsp;&emsp;
     &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
     <label for="searchterm" id="buscar">Buscar:</label> <input id="searchTerm" type="text" onkeyup="doSearch()" name="palabra">
       
@@ -145,7 +145,9 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
                     <input type="text" list="addpueblo"  name="pyn" id="Inputnombre2" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" disabled  autocomplete="off" >
                     <br><br>
                     <button type="submit">Guardar</button>
+                   
                 </form>
+                
                 </div>
             </div>
          </div>

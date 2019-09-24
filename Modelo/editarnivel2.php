@@ -43,20 +43,24 @@ echo $resultado['nivel1_id'];
 if ($newnacpue != "") {
   if ($newnacpue != $resultado['nivel1_id']) {
     if(mysqli_query($conn,$mod1)){
-      header('Location:  ../Vista/html/trab2.php');
+      echo "<script>//alert('Registro editado con éxito');
+  window.location.href='../Vista/html/nivel2.php';
+  </script>";
       } else{
       echo "ERROR: Could not able to execute $mod. " . mysqli_error($conn);
       }
   } else {
     if(mysqli_query($conn,$mod)){
-      header('Location:  ../Vista/html/trab2.php');
+      echo "<script>//alert('Registro editado con éxito');
+  window.location.href='../Vista/html/nivel2.php';
+  </script>";
       } else{
       echo "ERROR: Could not able to execute $mod. " . mysqli_error($conn);
       }
   } 
 } else {
-  echo "<script>alert('No puedes editar sin nacionalidad o pueblo');
-  window.location.href='../Vista/html/trab2.php';
+  echo "<script>//alert('No puedes editar sin nacionalidad o pueblo');
+  window.location.href='../Vista/html/nivel2.php';
   </script>";
 }
     

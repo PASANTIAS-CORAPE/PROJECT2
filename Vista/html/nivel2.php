@@ -44,7 +44,7 @@ if ($conn->connect_error) {
         </div>
     <center>
     <div id="cuerpo"> 
-               <a href="trab.php"><label id="retorno">Nivel 1</label></a>&emsp;&emsp;
+               <a href="inicio.php"><label id="retorno">Nivel 1</label></a>&emsp;&emsp;
        <a href="#popup"><input type="button" name="Añadir" id="Añadir" value="Añadir" ></a>&emsp;&emsp;
        <label for="searchterm" id="buscar">Buscar:</label> <input id="searchTerm" type="text" onkeyup="doSearch()" />
         <br><br>

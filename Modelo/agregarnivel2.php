@@ -29,9 +29,10 @@ if ($conn->connect_error) {
 
   if(mysqli_query($conn, $subnivel)){ 
     echo '<script>
-    alert("Registro guardado con exito");
+    //alert("Registro guardado con exito");
+    window.location.href="../Vista/html/nivel2.php";
    </script>'; 
-      header('Location: ../Vista/html/trab2.php');
+      
   } else{
       echo "ERROR: Could not able to execute $subnivel. " . mysqli_error($conn);
   }

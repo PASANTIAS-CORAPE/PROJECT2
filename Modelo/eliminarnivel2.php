@@ -30,9 +30,9 @@ while ($contador <= $numero) {
    mysqli_query($conn,$eliminar);
     mysqli_query($conn,$refresh);
    echo '<script>
-   alert("Registro eliminado con exito");
+   //alert("Registro eliminado con exito");
+   window.location.href="../Vista/html/nivel2.php";
   </script>';
-  header('Location: ../Vista/html/trab2.php');
   break;
   }
   $contador++;

@@ -37,9 +37,10 @@ $idnivel2=$numero+1;
     if ($n2nombre=="" || !isset($n2nombre)) {
         if(mysqli_query($conn, $sql)){ 
             echo '<script>
-            alert("Registro guardado con exito");
+            //alert("Registro guardado con exito");
+            window.location.href="../Vista/html/inicio.php";
            </script>'; 
-           header('Location: ../Vista/html/trab.php');
+           
           } else{
               echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
           } 
@@ -47,9 +48,10 @@ $idnivel2=$numero+1;
       if ($resp1==false) {
         if(mysqli_query($conn, $sql) && mysqli_query($conn, $subnivel)){ 
           echo '<script>
-          alert("Registro guardado con éxito");
+          //alert("Registro guardado con éxito");
+          window.location.href="../Vista/html/inicio.php";
          </script>'; 
-            header('Location: ../Vista/html/trab.php');
+            
         } else{
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
         }
@@ -57,9 +59,10 @@ $idnivel2=$numero+1;
         $subnivel2="UPDATE c_nivel2 SET nivel1_id='$idnivel2' WHERE nivel2_id=".$resultado['nivel2_id'];
         if(mysqli_query($conn, $sql) && mysqli_query($conn, $subnivel2)){ 
           echo '<script>
-          alert("Registro guardado con éxito");
+          //alert("Registro guardado con éxito");
+          window.location.href="../Vista/html/inicio.php";
          </script>'; 
-            header('Location: ../Vista/html/trab.php');
+            
         } else{
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
         }
