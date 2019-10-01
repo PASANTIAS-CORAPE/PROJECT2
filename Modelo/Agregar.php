@@ -4,7 +4,7 @@ header("content-type: text/html; charset=utf-8");
 //declara variables para la coneccona la basedebatos
 $servername = "localhost";
 $username = "root";
-$password = "1234";
+$password = "";
 $database = "nuevo";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$database);
@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
 //variables para capturar infor macion del formulario
   // Escape user inputs for security
-  $nombre = utf8_decode($_REQUEST['ipn']);
+  $nombre = trim(utf8_decode($_REQUEST['ipn']));
   $tipo = mysqli_real_escape_string($conn, $_REQUEST['ipt']);
   $n2nombre = mysqli_real_escape_string($conn, $_REQUEST['pyn']);
   $n2tipo="Pueblo";
@@ -32,8 +32,8 @@ $idnivel2=$numero+1;
   $subnivel="INSERT INTO c_nivel2 (nivel2_nombre, nivel2_tipo, nivel1_id) VALUES ('$n2nombre', '$n2tipo', '$idnivel2')";
 
 
-  //condicional para saber si envian variales vacias y paraverificarsilos datos de nivel 2 serepiteno no
-
+  //condicional para saber si envian variales vacias y paraverificarsilos datos de nivel 2 se repiteno no
+  //pregunta si la variables existe o esta vacia
     if ($n2nombre=="" || !isset($n2nombre)) {
         if(mysqli_query($conn, $sql)){ 
             echo '<script>
@@ -45,17 +45,8 @@ $idnivel2=$numero+1;
               echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
           } 
     }else{
+      //pregunta si la consulta res1 devolvio un valor o no
       if ($resp1==false) {
-        if(mysqli_query($conn, $sql) && mysqli_query($conn, $subnivel)){ 
-          echo '<script>
-          //alert("Registro guardado con éxito");
-          window.location.href="../Vista/html/inicio.php";
-         </script>'; 
-            
-        } else{
-            echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
-        }
-      }else {
         $subnivel2="UPDATE c_nivel2 SET nivel1_id='$idnivel2' WHERE nivel2_id=".$resultado['nivel2_id'];
         if(mysqli_query($conn, $sql) && mysqli_query($conn, $subnivel2)){ 
           echo '<script>
@@ -66,6 +57,18 @@ $idnivel2=$numero+1;
         } else{
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
         }
+      }else {
+        //si devolvio un valor ejecuta una query distintaa
+        if(mysqli_query($conn, $sql) && mysqli_query($conn, $subnivel)){ 
+          echo '<script>
+          //alert("Registro guardado con éxito");
+          window.location.href="../Vista/html/inicio.php";
+         </script>'; 
+            
+        } else{
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+        }
+
       }
         
     } 

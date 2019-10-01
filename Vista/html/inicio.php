@@ -7,14 +7,14 @@
     <meta http-equiv="Content-type" content="text/html">
     <script src="../../Modelo/jquery-2.1.4.js"></script>
     <link rel="stylesheet" href="../css/estilo.css">
-    <title>Document</title>
+    <title>CORAPE</title>
 </head>
 
 <?php
 //nuevo comentario
 $servername = "localhost";
 $username = "root";
-$password = "1234";
+$password = "";
 $database = "nuevo";
 // Crea la connection
 $conn = mysqli_connect($servername, $username, $password,$database);
@@ -165,7 +165,7 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
                        <label for="inputNombre">Nombre:</label>
                        </td> 
                        <td>
-                        <input type="text" id="InputNombre" name="editname" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" required>
+                        <input type="text" id="InputNombre" name="editname" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" required autocomplete="off">
                         </td>
                         </tr>
                         <br><br>

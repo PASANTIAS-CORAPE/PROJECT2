@@ -134,18 +134,13 @@ label{
     font-size: 14px;
 }
 #retorno{
-    font-size: 24px;
-    font-family: primaria;
-    background: transparent;
-    border: none
+    font-family: simply;
+
 }
-#retorno:hover{
-    font-family: will;
-    font-size: 24px;
-color: red;
-}
+
 a{
     text-decoration: none;
+    
 }
 button{
     font-size: 18px

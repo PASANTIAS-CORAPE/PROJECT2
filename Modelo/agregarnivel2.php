@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "1234";
+$password = "";
 $database = "nuevo";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password,$database);
@@ -14,9 +14,9 @@ if ($conn->connect_error) {
 
 //para insertar info
   // Escape user inputs for security
-  $nombre = mysqli_real_escape_string($conn, $_REQUEST['ipn']);
-  $n2nombre = utf8_decode($_REQUEST['ipn']);
-  $tipo = utf8_decode($_REQUEST['ipt']);
+  //$nombre = mysqli_real_escape_string($conn, $_REQUEST['ipn']);
+  $n2nombre = trim(utf8_decode($_REQUEST['ipn']));
+  $tipo = trim(utf8_decode($_REQUEST['ipt']));
   $n2tipo="Pueblo";
   $res= mysqli_query($conn,"select * from c_nivel2;");
 
@@ -25,7 +25,7 @@ if ($conn->connect_error) {
   $cosa=mysqli_query($conn,$sql);
   $resultado=mysqli_fetch_array($cosa);
   $idnivel1=intval($resultado['nivel1_id']);
-  $subnivel="INSERT INTO c_nivel2 (nivel2_nombre, nivel2_tipo, nivel1_id) VALUES ('$nombre', '$n2tipo', '$idnivel1')";
+  $subnivel="INSERT INTO c_nivel2 (nivel2_nombre, nivel2_tipo, nivel1_id) VALUES ('$n2nombre', '$n2tipo', '$idnivel1')";
 
   if(mysqli_query($conn, $subnivel)){ 
     echo '<script>
