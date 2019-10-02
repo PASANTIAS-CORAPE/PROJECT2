@@ -24,6 +24,7 @@ if ($conn->connect_error) {
   // creavariables de busqueda en consultas con sql y punteros
   $res= mysqli_query($conn,"select * from c_nivel2;");
   $respt= mysqli_query($conn,"select * from c_nivel1;");
+  $mames=mysqli_query($conn,"SELECT c_nivel1.nivel1_nombre AS nombres_a_poner FROM c_nivel1 INNER JOIN c_nivel2 ON c_nivel1.nivel1_id = c_nivel2.nivel1_id ORDER BY c_nivel2.nivel2_id ASC");
   $numero = $res->num_rows;
   $numero1 = $respt->num_rows;
   $contador=1; 
@@ -73,12 +74,15 @@ if ($conn->connect_error) {
                 while ($contador <= $numero){   
                     $resultado=mysqli_fetch_array($res);
                     $sql = mysqli_data_seek($res,$contador);
+                    $resultadoDeMames=mysqli_fetch_array($mames);
+                    $sqlDeNombres = mysqli_data_seek($mames,$contador);
+                    
     echo "<tr class='tablacontenido'>";  
     echo "<td>".$contador."</td>";  
     echo "<td>".utf8_encode($resultado['nivel2_nombre'])."</td>";  
     echo "<td>".$resultado['nivel2_tipo']."</td>";  
-    echo "<td>".$resultado['nivel1_id']."</td>";  
-    echo "<td>".'<a href="#popup1"> <button value="editar'.$contador.'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
+    echo "<td>".utf8_encode($resultadoDeMames['nombres_a_poner'])."</td>";  
+    echo "<td>".'<a href="#popup1"> <button value="editar'.$resultado['nivel2_id'].'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
     echo "<td>".'<form action="../../Modelo/eliminarnivel2.php" method="post"><button value="eliminar'.$resultado['nivel2_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
     echo "</tr>";  
     $contador++;
@@ -126,6 +130,7 @@ if ($conn->connect_error) {
                     </table>
                     <br><br>
                     <button type="submit">Guardar</button>
+                    <a href="#"><input type="button" value="Cancelar" style="font-size:18px"></a>
                 </form>
                 </div>
             </div>
@@ -153,7 +158,7 @@ if ($conn->connect_error) {
                        <label>Nacionalidad/Pueblo:</label>
                        </td>                                       
                         <td>
-                        <select name="cambio" id="inputTipo">
+                        <select name="cambio" id="inputTipo" required>
                         <?php
                         while ($cont <= $numero1){   
                             $resultado1=mysqli_fetch_array($respt);
@@ -169,6 +174,7 @@ if ($conn->connect_error) {
                     </center>
                         <br><br>
                         <button>Guardar</button>
+                        <a href="#"><input type="button" value="Cancelar" style="font-size:18px"></a>
                     </form>
                     </div>
                 </div>

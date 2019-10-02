@@ -28,12 +28,17 @@ $resultadof = mysqli_fetch_array($rest);
 $numero = intval($resultadof['MAX(nivel1_id)']);
 //funcion para eliminar registros de una basede datos
 //$refresh="alter table c_nivel1 auto_increment=1;";
-
+if ($nombre == ""){
+  echo '<script>
+  alert("este campo no puede ir vacio");
+  window.location.href="../Vista/html/inicio.php";
+ </script>';
+}else{
 while ($contador <= $numero+1) {
   switch ($quedit) {
     case 'editar' . $contador:
-      // consultas query para la modificacion
-      $mod = "UPDATE c_nivel1 SET nivel1_nombre = '$nombre' , nivel1_tipo = '$tipo' WHERE nivel1_id = '$contador'";
+      // consultas query para la modificacion      
+        $mod = "UPDATE c_nivel1 SET nivel1_nombre = '$nombre' , nivel1_tipo = '$tipo' WHERE nivel1_id = '$contador'";
       if (mysqli_query($conn, $mod)) {
         echo '<script>
     //alert("Registro editado con exito");
@@ -43,6 +48,8 @@ while ($contador <= $numero+1) {
         echo "ERROR: Could not able to execute $mod. " . mysqli_error($conn);
       }
       break;
-  }
+    }
   $contador++;
 }
+}
+?>

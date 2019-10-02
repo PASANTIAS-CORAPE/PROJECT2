@@ -140,10 +140,9 @@ label{
 
 a{
     text-decoration: none;
-    
 }
 button{
-    font-size: 18px
+    font-size: 18px;
 }
 #InputTipo,#inputTipo{
     /* font-family: "simply"; */

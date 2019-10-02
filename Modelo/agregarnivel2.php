@@ -26,7 +26,12 @@ if ($conn->connect_error) {
   $resultado=mysqli_fetch_array($cosa);
   $idnivel1=intval($resultado['nivel1_id']);
   $subnivel="INSERT INTO c_nivel2 (nivel2_nombre, nivel2_tipo, nivel1_id) VALUES ('$n2nombre', '$n2tipo', '$idnivel1')";
-
+  if ($n2nombre == ""){
+    echo '<script>
+    alert("este campo no puede ir vacio");
+    window.location.href="../Vista/html/nivel2.php";
+   </script>';
+  }else{
   if(mysqli_query($conn, $subnivel)){ 
     echo '<script>
     //alert("Registro guardado con exito");
@@ -36,5 +41,5 @@ if ($conn->connect_error) {
   } else{
       echo "ERROR: Could not able to execute $subnivel. " . mysqli_error($conn);
   }
-
+  }
 ?>

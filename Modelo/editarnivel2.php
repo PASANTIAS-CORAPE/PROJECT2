@@ -31,7 +31,12 @@ $numero = intval($resultadof['MAX(nivel2_id)']);
 
 var_dump($newnacpue);
 //funcion para eliminar registros de una basede datos
-
+if ($nombre == ""){
+  echo '<script>
+  alert("este campo no puede ir vacio");
+  window.location.href="../Vista/html/nivel2.php";
+ </script>';
+}else{
 while ($contador <= $numero+1) {
   switch ($quedit) {
     case 'editar' . $contador:
@@ -39,7 +44,6 @@ while ($contador <= $numero+1) {
       // consultas query para la modificacion de datos
       $mod = "UPDATE c_nivel2 SET nivel2_nombre = '$nombre' , nivel2_tipo = '$tipo' WHERE nivel2_id = '$contador'";
       $mod1 = "UPDATE c_nivel2 SET nivel2_nombre = '$nombre' , nivel2_tipo = '$tipo', nivel1_id = $newnacpue WHERE nivel2_id = '$contador'";
-      
       if ($newnacpue != "") {//pregunta si hay un valor ien la base de datos que sea igual al ingresado
         if ($newnacpue != $resultado['nivel1_id']) {
           if (mysqli_query($conn, $mod1)) {
@@ -68,3 +72,5 @@ while ($contador <= $numero+1) {
   }
   $contador++;
 }
+}
+?>

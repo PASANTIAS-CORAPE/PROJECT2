@@ -84,7 +84,7 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
     echo "<td>".$contador."</td>";  
     echo "<td>".utf8_encode($resultado['nivel1_nombre'])."</td>";  
     echo "<td>".$resultado['nivel1_tipo']."</td>";  
-    echo "<td>".'<a href="#popup1"> <button value="editar'.$contador.'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
+    echo "<td>".'<a href="#popup1"> <button value="editar'.$resultado['nivel1_id'].'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
     echo "<td>".'<form action="../../Modelo/eliminar.php" method="post"><button value="eliminar'.$resultado['nivel1_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
     echo "</tr>";  
     $contador++;
@@ -106,7 +106,7 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
                    <label for="inputnombre">Nombre:</label>
                                 </td>
                        <td> 
-                    <input type="text" id="inputnombre" name="ipn" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" required >
+                    <input type="text" id="inputnombre" name="ipn" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" required autocomplete="off" >
                     </td>
                     </tr>
                     
@@ -142,10 +142,10 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
                          } 
                         ?>
                     </datalist>           
-                    <input type="text" list="addpueblo"  name="pyn" id="Inputnombre2" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" disabled  autocomplete="off" >
+                    <input type="text" list="addpueblo"  name="pyn" id="Inputnombre2" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" disabled required autocomplete="off" >
                     <br><br>
                     <button type="submit">Guardar</button>
-                   
+                   <a href="#"><input type="button" value="Cancelar" style="font-size:18px"></a>
                 </form>
                 
                 </div>
@@ -184,6 +184,7 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
                     </table>
                         <br><br>
                         <button>Guardar</button>
+                        <a href="#"><input type="button" value="Cancelar" style="font-size:18px"></a>
                     </form>
                     </div>
                 </div>
