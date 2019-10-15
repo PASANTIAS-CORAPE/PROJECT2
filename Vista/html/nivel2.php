@@ -14,7 +14,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "nuevo";
+$database = "corapeor_repositorio";
 // Crea la connection
 $conn = mysqli_connect($servername, $username, $password,$database);
 // pregunta si hay un error al conectaarseylo nuestra 
@@ -22,9 +22,9 @@ if ($conn->connect_error) {
     die("ERROR: No se puede conectar al servidor: " . $conn->connect_error);
   }
   // creavariables de busqueda en consultas con sql y punteros
-  $res= mysqli_query($conn,"select * from c_nivel2;");
-  $respt= mysqli_query($conn,"select * from c_nivel1;");
-  $mames=mysqli_query($conn,"SELECT c_nivel1.nivel1_nombre AS nombres_a_poner FROM c_nivel1 INNER JOIN c_nivel2 ON c_nivel1.nivel1_id = c_nivel2.nivel1_id ORDER BY c_nivel2.nivel2_id ASC");
+  $res= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS not  NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %') OR (documento_categoria_nombre LIKE 'Nacionalidad %'));");
+  $respt= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND (documento_categoria_nombre LIKE 'Nacionalidad %');");
+  $result=mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND documento_categoria_id = ANY(select documento_categoria_padre_id from corapeor_repositorio.x_documento_categoria where x_documento_categoria.documento_categoria_padre_id IS not NULL);");
   $numero = $res->num_rows;
   $numero1 = $respt->num_rows;
   $contador=1; 
@@ -57,9 +57,6 @@ if ($conn->connect_error) {
                         Número
                     </th>
                     <th>
-                        Nombre
-                    </th>
-                    <th>
                         Pueblo
                     </th>
                     <th>
@@ -74,16 +71,17 @@ if ($conn->connect_error) {
                 while ($contador <= $numero){   
                     $resultado=mysqli_fetch_array($res);
                     $sql = mysqli_data_seek($res,$contador);
-                    $resultadoDeMames=mysqli_fetch_array($mames);
-                    $sqlDeNombres = mysqli_data_seek($mames,$contador);
+                    //$resultado2=mysqli_fetch_array($result);
+                    //$sql2 = mysqli_data_seek($result,$contador);
+                    
                     
     echo "<tr class='tablacontenido'>";  
     echo "<td>".$contador."</td>";  
-    echo "<td>".utf8_encode($resultado['nivel2_nombre'])."</td>";  
-    echo "<td>".$resultado['nivel2_tipo']."</td>";  
-    echo "<td>".utf8_encode($resultadoDeMames['nombres_a_poner'])."</td>";  
-    echo "<td>".'<a href="#popup1"> <button value="editar'.$resultado['nivel2_id'].'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
-    echo "<td>".'<form action="../../Modelo/eliminarnivel2.php" method="post"><button value="eliminar'.$resultado['nivel2_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
+    echo "<td>".utf8_encode($resultado['documento_categoria_nombre'])."</td>";  
+    
+    echo "<td>".$resultado['documento_categoria_padre_id']."</td>";  
+    echo "<td>".'<a href="#popup1"> <button value="editar'.$resultado['documento_categoria_id'].'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
+    echo "<td>".'<form action="../../Modelo/eliminarnivel2.php" method="post"><button value="eliminar'.$resultado['documento_categoria_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
     echo "</tr>";  
     $contador++;
 } ?> 
@@ -111,7 +109,7 @@ if ($conn->connect_error) {
                     
                     <tr>
                     <td>
-                   <label for="inputtipo">A que Nacionalidad/Pueblo pertenece:</label>
+                   <label for="inputtipo">A que Nacionalidad pertenece:</label>
                    </td> 
                    <td>
                     <select id="inputTipo" name="ipt">
@@ -119,7 +117,7 @@ if ($conn->connect_error) {
                         while ($cont <= $numero1){   
                             $resultado1=mysqli_fetch_array($respt);
                             $sql1 = mysqli_data_seek($respt,$cont);
-            echo "<option>".utf8_encode($resultado1['nivel1_nombre'])."</option>";             
+            echo "<option>".utf8_encode($resultado1['documento_categoria_nombre'])."</option>";             
             $cont++;
         } 
         $cont=0;
@@ -155,7 +153,7 @@ if ($conn->connect_error) {
                         </tr>
                         <tr>
                         <td>
-                       <label>Nacionalidad/Pueblo:</label>
+                       <label>Nacionalidad:</label>
                        </td>                                       
                         <td>
                         <select name="cambio" id="inputTipo" required>
@@ -163,7 +161,8 @@ if ($conn->connect_error) {
                         while ($cont <= $numero1){   
                             $resultado1=mysqli_fetch_array($respt);
                             $sql1 = mysqli_data_seek($respt,$cont);
-            echo "<option value='$resultado1[nivel1_id]'>".utf8_encode($resultado1['nivel1_nombre'])."</option>";             
+                            //value=$resultado1[documento_categoria_nombre]     utf8_encode($resultado1['documento_categoria_nombre'])
+            echo "<option >".utf8_encode($resultado1['documento_categoria_nombre'])."</option>";             
             $cont++;
         } 
                         ?>

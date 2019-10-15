@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "nuevo";
+$database = "corapeor_repositorio";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $database);
 if ($conn->connect_error) {
@@ -15,17 +15,16 @@ if ($conn->connect_error) {
 // Escape user inputs for security
 $nombre = trim(utf8_decode($_REQUEST['editname']));
 $tipo = trim(mysqli_real_escape_string($conn, $_REQUEST['editkind']));
+$concat=$tipo." ".$nombre;
 $quedit = $_POST['valedit'];
 
-//datosparalaconsulta y eliminaciion
-$res = mysqli_query($conn, "select * from c_nivel1;");
-$sql = mysqli_data_seek($res, 11);
-$resultado = mysqli_fetch_array($res);
+
 //$numero = $res->num_rows;
 $contador = 1;
-$rest = mysqli_query($conn, "SELECT MAX(nivel1_id) FROM c_nivel1;");
+$rest = mysqli_query($conn, "SELECT MAX(documento_categoria_id) FROM x_documento_categoria;");
 $resultadof = mysqli_fetch_array($rest);
-$numero = intval($resultadof['MAX(nivel1_id)']);
+$numero = intval($resultadof['MAX(documento_categoria_id)']);
+
 //funcion para eliminar registros de una basede datos
 //$refresh="alter table c_nivel1 auto_increment=1;";
 if ($nombre == ""){
@@ -38,7 +37,7 @@ while ($contador <= $numero+1) {
   switch ($quedit) {
     case 'editar' . $contador:
       // consultas query para la modificacion      
-        $mod = "UPDATE c_nivel1 SET nivel1_nombre = '$nombre' , nivel1_tipo = '$tipo' WHERE nivel1_id = '$contador'";
+        $mod = "UPDATE x_documento_categoria SET documento_categoria_nombre = '$concat'  WHERE documento_categoria_id = '$contador'";
       if (mysqli_query($conn, $mod)) {
         echo '<script>
     //alert("Registro editado con exito");

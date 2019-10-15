@@ -15,7 +15,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "nuevo";
+$database = "corapeor_repositorio";
 // Crea la connection
 $conn = mysqli_connect($servername, $username, $password,$database);
 // pregunta si hay un error al conectaarseylo nuestra 
@@ -23,17 +23,13 @@ if ($conn->connect_error) {
     die("ERROR: No se puede conectar al servidor: " . $conn->connect_error);
   }
   // creavariables de busques en consultas con sql y punteros
-  $res= mysqli_query($conn,"select * from c_nivel1;");
+  
+  $res= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %') OR (documento_categoria_nombre LIKE 'Nacionalidad %'));");
   $numero = $res->num_rows;
   $contador=1; 
-  $respt= mysqli_query($conn,"SELECT * FROM c_nivel2");
+  $respt= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NOT NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %') OR (documento_categoria_nombre LIKE 'Nacionalidad %'));");
   $numero1 = $respt->num_rows;
 $cont=1; 
-//de prueba
-$rest= mysqli_query($conn,"SELECT MAX(nivel1_id) FROM c_nivel1;");
-$resultadof=mysqli_fetch_array($rest);
-$numero1 = intval($resultadof['MAX(nivel1_id)']);
-
 
   $conn->close();
 ?>
@@ -63,9 +59,9 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
                     <th>
                         Número
                     </th>
-                    <th>
+                    <!--<th>
                         Nombre
-                    </th>
+                    </th>-->
                     <th>
                         Nacionalidad / Pueblo
                     </th>
@@ -78,14 +74,14 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
                 <?php
                 //codigo para llenar la tabla html con informacion de las tablas de mysql
                 while ($contador <= $numero){   
-                    $resultado=mysqli_fetch_array($res);
-                    $sql = mysqli_data_seek($res,$contador);
+                  $resultado=mysqli_fetch_array($res);
+                $sql = mysqli_data_seek($res,$contador);
     echo "<tr class='tablacontenido'>";  
     echo "<td>".$contador."</td>";  
-    echo "<td>".utf8_encode($resultado['nivel1_nombre'])."</td>";  
-    echo "<td>".$resultado['nivel1_tipo']."</td>";  
-    echo "<td>".'<a href="#popup1"> <button value="editar'.$resultado['nivel1_id'].'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
-    echo "<td>".'<form action="../../Modelo/eliminar.php" method="post"><button value="eliminar'.$resultado['nivel1_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
+     
+    echo "<td>".utf8_encode($resultado['documento_categoria_nombre'])."</td>";  
+    echo "<td>".'<a href="#popup1"> <button value="editar'.$resultado['documento_categoria_id'].'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
+    echo "<td>".'<form action="../../Modelo/eliminar.php" method="post"><button value="eliminar'.$resultado['documento_categoria_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
     echo "</tr>";  
     $contador++;
 } ?> 
@@ -136,10 +132,10 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
                     <?php
                         while ($cont <= $numero1){  
                             $resul=mysqli_fetch_array($respt);
-                            $sql1 = mysqli_data_seek($respt,$cont);
-            echo "<option>".utf8_encode($resul['nivel2_nombre'])."</option>";  
+                           $sql1 = mysqli_data_seek($respt,$cont);
+            echo "<option>".utf8_encode($resul['documento_categoria_nombre'])."</option>";  
                              $cont++;
-                         } 
+                       } 
                         ?>
                     </datalist>           
                     <input type="text" list="addpueblo"  name="pyn" id="Inputnombre2" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" disabled required autocomplete="off" >
@@ -194,3 +190,4 @@ $numero1 = intval($resultadof['MAX(nivel1_id)']);
 </body>
 <script src="../../Modelo/buscar.js"></script>
 </html>
+                        

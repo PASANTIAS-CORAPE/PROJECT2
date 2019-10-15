@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$database = "nuevo";
+$database = "corapeor_repositorio";
 
 
 
@@ -17,16 +17,16 @@ $sql = mysqli_data_seek($res,11);
 $resultado=mysqli_fetch_array($res);
 //$numero = $res->num_rows;
 $contador=1;
-$rest= mysqli_query($conn,"SELECT MAX(nivel2_id) FROM c_nivel2;");
+$rest= mysqli_query($conn,"SELECT MAX(documento_categoria_id) FROM x_documento_categoria;");
 $resultadof=mysqli_fetch_array($rest);
-$numero = intval($resultadof['MAX(nivel2_id)']);
+$numero = intval($resultadof['MAX(documento_categoria_id)']);
 
 //funcion para eliminar registros de una basede datos
 $refresh="alter table c_nivel2 auto_increment=1;";//estalinea es para que empieze desdeel menor numero existente el conteodel id
 while ($contador <= $numero) {
   switch ($_POST['eliminar']) {
   case 'eliminar'.$contador:
-  $eliminar="delete from c_nivel2 where nivel2_id=".$contador.";";
+  $eliminar="DELETE FROM x_documento_categoria where documento_categoria_id=".$contador.";";
    mysqli_query($conn,$eliminar);
     mysqli_query($conn,$refresh);
    echo '<script>
