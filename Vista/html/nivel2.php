@@ -23,7 +23,7 @@ if ($conn->connect_error) {
     die("ERROR: No se puede conectar al servidor: " . $conn->connect_error);
   }
   // crea variables de busqueda usando consultas con sql, ademas crea varibles que permitiran llenar tabla de html y demas
-  $res= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS not  NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %') OR (documento_categoria_nombre LIKE 'Nacionalidad %'));");
+  $res= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS not  NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %'));");
   $respt= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND (documento_categoria_nombre LIKE 'Nacionalidad %');");
   //la siguiente line y las lineas que usen esta varibles estan comentadas por que no lograron satisfacer los requerimiento ded mostrar el nombre de el registro padre de los registro de nivel2
   //$result=mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND documento_categoria_id = ANY(select documento_categoria_padre_id from corapeor_repositorio.x_documento_categoria where x_documento_categoria.documento_categoria_padre_id IS not NULL);");
@@ -31,6 +31,7 @@ if ($conn->connect_error) {
   $numero1 = $respt->num_rows;
   $contador=1; 
   $cont=1; 
+  
   $conn->close();
 ?>
 
@@ -75,12 +76,22 @@ if ($conn->connect_error) {
                     //PSD: las siguientes lineas de php puro son para rellenar o bien tablas o select o tambien datalist.
                     $resultado=mysqli_fetch_array($res);
                     $sql = mysqli_data_seek($res,$contador);
-                    //$resultado2=mysqli_fetch_array($result);
-                    //$sql2 = mysqli_data_seek($result,$contador);
+                    $cnt=0;
     echo "<tr class='tablacontenido'>";  
     echo "<td>".$contador."</td>";  
-    echo "<td>".utf8_encode($resultado['documento_categoria_nombre'])."</td>";  
-    echo "<td>".$resultado['documento_categoria_padre_id']."</td>";  
+    echo "<td>".utf8_encode($resultado['documento_categoria_nombre'])."</td>";
+    while($cnt<=$numero+1){
+        $resultado2=mysqli_fetch_array($respt);
+        $sql2 = mysqli_data_seek($respt,$cnt);
+        if ($resultado['documento_categoria_padre_id']==$resultado2['documento_categoria_id']) {
+            echo "<td>".$resultado2['documento_categoria_nombre']."</td>";
+            break;
+        } else if($cnt==$numero){
+            echo "<td>Sin Nacionalidad</td>"; 
+            break;
+        }
+        $cnt++;
+    }
     echo "<td>".'<a href="#popup1"> <button value="editar'.$resultado['documento_categoria_id'].'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
     echo "<td>".'<form action="../../Modelo/eliminarnivel2.php" method="post"><button value="eliminar'.$resultado['documento_categoria_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
     echo "</tr>";  
