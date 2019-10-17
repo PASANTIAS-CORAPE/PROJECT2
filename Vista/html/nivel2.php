@@ -31,7 +31,6 @@ if ($conn->connect_error) {
   $numero1 = $respt->num_rows;
   $contador=1; 
   $cont=1; 
-  
   $conn->close();
 ?>
 
@@ -84,7 +83,7 @@ if ($conn->connect_error) {
         $resultado2=mysqli_fetch_array($respt);
         $sql2 = mysqli_data_seek($respt,$cnt);
         if ($resultado['documento_categoria_padre_id']==$resultado2['documento_categoria_id']) {
-            echo "<td>".$resultado2['documento_categoria_nombre']."</td>";
+            echo "<td>".utf8_encode($resultado2['documento_categoria_nombre'])."</td>";
             break;
         } else if($cnt==$numero){
             echo "<td>Sin Nacionalidad</td>"; 
@@ -94,9 +93,12 @@ if ($conn->connect_error) {
     }
     echo "<td>".'<a href="#popup1"> <button value="editar'.$resultado['documento_categoria_id'].'" name="editar" id="Editar" onclick="editdatos.value=this.value;">Editar</button></a>'."</td>";  
     echo "<td>".'<form action="../../Modelo/eliminarnivel2.php" method="post"><button value="eliminar'.$resultado['documento_categoria_id'].'" name="eliminar" id="Eliminar">Eliminar</button></form>'."</td>"; 
-    echo "</tr>";  
+    echo "</tr>";
+    $sql2 = mysqli_data_seek($respt,0);  
     $contador++;
-} ?> 
+} 
+
+?> 
             </table>
         </div>
         </center>
@@ -118,7 +120,6 @@ if ($conn->connect_error) {
                     <input type="text" id="inputnombre" name="ipn" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" required autocomplete="off">
                     </td>
                     </tr>
-                    
                     <tr>
                     <td>
                    <label for="inputtipo">A que Nacionalidad pertenece:</label>
@@ -126,9 +127,10 @@ if ($conn->connect_error) {
                    <td>
                     <select id="inputTipo" name="ipt">
                         <?php
-                        while ($cont <= $numero1){   
+                        while ($cont <= $numero1){  
+                        
                             $resultado1=mysqli_fetch_array($respt);
-                            $sql1 = mysqli_data_seek($respt,$cont);
+                            $sql1 = mysqli_data_seek($respt,$cont); 
             echo "<option>".utf8_encode($resultado1['documento_categoria_nombre'])."</option>";             
             $cont++;
         } 
