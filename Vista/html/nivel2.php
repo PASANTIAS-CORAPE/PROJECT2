@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +8,6 @@
     <link rel="stylesheet" href="../css/estilo.css">
     <title>CORAPE</title>
 </head>
-
 <?php
 //declaracion de varibles para conectarse a la DB
 $servername = "localhost";
@@ -22,15 +20,28 @@ $conn = mysqli_connect($servername, $username, $password,$database);
 if ($conn->connect_error) {
     die("ERROR: No se puede conectar al servidor: " . $conn->connect_error);
   }
+
+// usando variables para conectarse  y modificar datos de la base en mongodb
+require '../../vendor/autoload.php' ;
+$uri="mongodb://Daniel:1234@localhost/baseprueba?ssl=false";
+$client=new MongoDB\Client($uri);
+$db = $client->baseprueba;
+$coleccion = $db->categorias;
+
+
   // crea variables de busqueda usando consultas con sql, ademas crea varibles que permitiran llenar tabla de html y demas
   $res= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS not  NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %'))ORDER BY documento_categoria_nombre;");
   $respt= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND (documento_categoria_nombre LIKE 'Nacionalidad %')ORDER BY documento_categoria_nombre;");
+  $respect= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND (documento_categoria_nombre LIKE 'Pueblo %')ORDER BY documento_categoria_nombre;");
+  
   //la siguiente line y las lineas que usen esta varibles estan comentadas por que no lograron satisfacer los requerimiento ded mostrar el nombre de el registro padre de los registro de nivel2
   //$result=mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND documento_categoria_id = ANY(select documento_categoria_padre_id from corapeor_repositorio.x_documento_categoria where x_documento_categoria.documento_categoria_padre_id IS not NULL);");
   $numero = $res->num_rows;
   $numero1 = $respt->num_rows;
+  $numero10 = $respect->num_rows;
   $contador=1; 
   $cont=1; 
+  $acumulador=1;
   $conn->close();
 ?>
 
@@ -75,6 +86,7 @@ if ($conn->connect_error) {
                     //PSD: las siguientes lineas de php puro son para rellenar o bien tablas o select o tambien datalist.
                     $resultado=mysqli_fetch_array($res);
                     $sql = mysqli_data_seek($res,$contador);
+                    
                     $cnt=0;
     echo "<tr class='tablacontenido'>";  
     echo "<td>".$contador."</td>";  
@@ -86,6 +98,8 @@ if ($conn->connect_error) {
             echo "<td>".utf8_encode($resultado2['documento_categoria_nombre'])."</td>";
             break;
         } else if($cnt==$numero){
+            //$vuelta="UPDATE x_documento_categoria SET documento_categoria_padre_id = NULL WHERE documento_categoria_id=" . intval($resultado['documento_categoria_id']);
+            //if(mysqli_query($conn, $vuelta) && $coleccion->updateOne(array("_id"=>intval($resultado['documento_categoria_id'])),array('$set'=>array("padreId"=>0)))){               } 
             echo "<td>Sin Nacionalidad</td>"; 
             break;
         }
@@ -97,13 +111,11 @@ if ($conn->connect_error) {
     $sql2 = mysqli_data_seek($respt,0);  
     $contador++;
 } 
-
 ?> 
             </table>
         </div>
         </center>
     </div>
-
     </div>
     <div id="popup" class="overlay">
             <div id="popupBody">
@@ -117,7 +129,17 @@ if ($conn->connect_error) {
                    <label for="inputnombre">Nombre:</label>
                                 </td>
                        <td> 
-                    <input type="text" id="inputnombre" name="ipn" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" required autocomplete="off">
+                       <datalist id="pueblosNivelUno">
+                        <?php
+                        while ($acumulador <= $numero10) {
+                            $resul1 = mysqli_fetch_array($respect);
+                            $sql10 = mysqli_data_seek($respect, $acumulador);
+                            echo "<option>" . utf8_encode($resul1['documento_categoria_nombre']) . "</option>";
+                            $acumulador++;
+                        }
+                        ?>
+                    </datalist>
+                    <input type="text" list="pueblosNivelUno" id="inputnombre" name="ipn" pattern="[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ]{2,30}" title="solo puede ingresar texto, de entre 2 y 30 caracteres" required autocomplete="off">
                     </td>
                     </tr>
                     <tr>
@@ -128,7 +150,6 @@ if ($conn->connect_error) {
                     <select id="inputTipo" name="ipt">
                         <?php
                         while ($cont <= $numero1){  
-                        
                             $resultado1=mysqli_fetch_array($respt);
                             $sql1 = mysqli_data_seek($respt,$cont); 
             echo "<option>".utf8_encode($resultado1['documento_categoria_nombre'])."</option>";             
@@ -195,5 +216,4 @@ if ($conn->connect_error) {
 
 </body>
 <script src="../../Modelo/buscar.js"></script>
-
 </html>
