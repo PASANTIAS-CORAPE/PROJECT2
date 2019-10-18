@@ -23,8 +23,8 @@ if ($conn->connect_error) {
     die("ERROR: No se puede conectar al servidor: " . $conn->connect_error);
   }
   // crea variables de busqueda usando consultas con sql, ademas crea varibles que permitiran llenar tabla de html y demas
-  $res= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS not  NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %'));");
-  $respt= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND (documento_categoria_nombre LIKE 'Nacionalidad %');");
+  $res= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS not  NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %'))ORDER BY documento_categoria_nombre;");
+  $respt= mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND (documento_categoria_nombre LIKE 'Nacionalidad %')ORDER BY documento_categoria_nombre;");
   //la siguiente line y las lineas que usen esta varibles estan comentadas por que no lograron satisfacer los requerimiento ded mostrar el nombre de el registro padre de los registro de nivel2
   //$result=mysqli_query($conn,"SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND documento_categoria_id = ANY(select documento_categoria_padre_id from corapeor_repositorio.x_documento_categoria where x_documento_categoria.documento_categoria_padre_id IS not NULL);");
   $numero = $res->num_rows;

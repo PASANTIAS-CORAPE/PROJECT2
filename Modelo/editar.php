@@ -42,7 +42,7 @@ while ($contador <= $numero+1) {
     case 'editar' . $contador:
       // consultas query para la actualizacion del regiistro escogido     
         $mod = "UPDATE x_documento_categoria SET documento_categoria_nombre = '$concat'  WHERE documento_categoria_id = '$contador'";
-      if (mysqli_query($conn, $mod) && $coleccion->updateOne(array("_id"=>$contador),array('$set'=>array("NombreTipo"=>$concat)))) {//si la consulta se realiza con exito se enviara a la pagina de inicio caso contrario se muestra un mensaje de error
+      if (mysqli_query($conn, $mod) && $coleccion->updateOne(array("_id"=>$contador),array('$set'=>array("NombreTipo"=>utf8_encode($concat))))) {//si la consulta se realiza con exito se enviara a la pagina de inicio caso contrario se muestra un mensaje de error
         echo '<script>
     //alert("Registro editado con exito");
     window.location.href="../Vista/html/inicio.php";

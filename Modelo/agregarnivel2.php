@@ -38,7 +38,7 @@ $idnivel2 = $numero + 1;
 
   $documento = array( 
     "_id" => $idnivel2, 
-    "NombreTipo" => $concat, 
+    "NombreTipo" => utf8_encode($concat), 
     "padreId" => $idnivel1
   );
 

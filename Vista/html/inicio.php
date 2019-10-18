@@ -23,12 +23,12 @@ if ($conn->connect_error) {
     die("ERROR: No se puede conectar al servidor: " . $conn->connect_error);
 }
 // crea variables de busqueda usando consultas con sql (o querys)
-$res = mysqli_query($conn, "SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %') OR (documento_categoria_nombre LIKE 'Nacionalidad %'));");
+$res = mysqli_query($conn, "SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %') OR (documento_categoria_nombre LIKE 'Nacionalidad %'))ORDER BY documento_categoria_nombre;");
 // la siguiente linea representa la cantidad de resultados que arroja la consulta o query
 $numero = $res->num_rows;
 //contador que sevira para llenar las tablas PSD:las siguientes lineas hasta quese cierre la conneccion se repiten
 $contador = 1;
-$respt = mysqli_query($conn, "SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NOT NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %') OR (documento_categoria_nombre LIKE 'Nacionalidad %'));");
+$respt = mysqli_query($conn, "SELECT * FROM corapeor_repositorio.x_documento_categoria  WHERE (x_documento_categoria.documento_categoria_padre_id IS NOT NULL) AND ((documento_categoria_nombre LIKE 'Pueblo %') OR (documento_categoria_nombre LIKE 'Nacionalidad %'))ORDER BY documento_categoria_nombre;");
 $numero1 = $respt->num_rows;
 $cont = 1;
 $conn->close();
@@ -53,7 +53,6 @@ $conn->close();
             <br><br>
 
             <div id="tabladecomtenidos">
-
                 <table border="1" id="regTable" name="tablainfo">
                     <tr class="tablatitulo">
                         <th>
@@ -123,7 +122,7 @@ $conn->close();
                         </tr>
                     </table>
                     <br>
-                    <div id="opcionNivelDos">
+                    <div id="opcionNivelDos" style="display:block">
                     <label for="opcion">Tiene elementos de nivel 2</label> &emsp;
                     <label for="opcion">SI</label>
                     <input type="radio" name="opcion" id="si" onclick="Inputnombre2.disabled=false;">
@@ -201,9 +200,9 @@ function Mostrar(){
     var seleccion=document.getElementById("inputTipo").value;
    // var visible=document.getElementById("opcionNivelDos");
 if (seleccion==="Nacionalidad") {
-    document.getElementById("opcionNivelDos").style="display:block";
+    document.getElementById("opcionNivelDos").style="display: block";
 }else if(seleccion==="Pueblo"){
-    document.getElementById("opcionNivelDos").style="display:none";
+    document.getElementById("opcionNivelDos").style="display: none";
 }
 }
 </script>

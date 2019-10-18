@@ -43,14 +43,15 @@ $idnueva = $idnivel2 + 1;
 //consultas mysql para agreagar a las tablas 
 $sql = "INSERT INTO x_documento_categoria (documento_categoria_id,documento_categoria_nombre) VALUES ('$idnivel2', '$concat')";
 //define el registro a ingresar en la base de datos en mongodb
+//DDRC el utf8_encode permite guardar caracteres especiales en la base de de datos no relacional(MongoDB), al igual que en la base de datosrelacional (MySQL) se usa en cambi el utf8_decode
 $documento = array( 
   "_id" => $idnivel2, 
-  "NombreTipo" => $concat, 
+  "NombreTipo" => utf8_encode($concat), 
   "padreId" => 0
 );
 $documento1 = array( 
   "_id" => $idnueva, 
-  "NombreTipo" => $concat1, 
+  "NombreTipo" => utf8_encode($concat1), 
   "padreId" => $idnivel2
 );
 

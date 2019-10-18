@@ -54,7 +54,7 @@ while ($contador <= $numero+1) {
       // consultas query para la edicion de datos en la DB
       $mod1 = "UPDATE x_documento_categoria SET documento_categoria_nombre = '$concat', documento_categoria_padre_id = '$resultado[documento_categoria_id]' WHERE documento_categoria_id = '$contador'";
       if ($newnacpue != "") {//pregunta se la variable newnacpue fue enviado sin un valor, si es asi muestra un mensaje de error,si no es asi procede con la edicion del registro en la DB
-          if (mysqli_query($conn, $mod1) && $coleccion->updateOne(array("_id"=>$contador),array('$set'=>array("NombreTipo"=>$concat, "padreId"=>$resultado['documento_categoria_id'])))) {
+          if (mysqli_query($conn, $mod1) && $coleccion->updateOne(array("_id"=>$contador),array('$set'=>array("NombreTipo"=>utf8_encode($concat), "padreId"=>$resultado['documento_categoria_id'])))) {
             echo "<script>//alert('Registro editado con éxito');
   window.location.href='../Vista/html/nivel2.php';
   </script>";
