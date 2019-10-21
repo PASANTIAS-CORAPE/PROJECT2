@@ -29,8 +29,9 @@ window.location.href="../Vista/inicio.php";
 break;
   } else {
     while($cnt<$maximo){
-      $resultado=mysqli_fetch_array($edicion);
+      
       $sql = mysqli_data_seek($edicion,$cnt);
+      $resultado=mysqli_fetch_array($edicion);
       //echo $resultado['documento_categoria_padre_id']."<br>";
       //echo $resultado['documento_categoria_id']."<br>";
       //echo $resultado['documento_categoria_nombre']."<br>";
@@ -38,13 +39,13 @@ break;
       $renivelar="UPDATE x_documento_categoria SET documento_categoria_padre_id = NULL WHERE documento_categoria_id = $resultado[documento_categoria_id]";
       mysqli_query($conn,$renivelar);
       $coleccion->updateMany(array("_id"=>$resultado['documento_categoria_id']),array('$set'=>array("padreId"=>0)));
-       
+      
    $cnt++;
       }
       echo '<script>
       //alert("Registro eliminado con exito");
       window.location.href="../Vista/inicio.php";
-     </script>';    
+      </script>';    
   }
   }
   $contador++;
