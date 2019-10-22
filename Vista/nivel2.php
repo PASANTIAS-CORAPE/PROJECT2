@@ -36,6 +36,7 @@ require('../Modelo/conecciones.php');
         </h1>
         </center>
         </div>
+    <br>
     <center>
     <div id="cuerpo"> 
                <a href="inicio.php"><input type="button" id="retorno" value="Nivel 1"></a>  &emsp;&emsp;

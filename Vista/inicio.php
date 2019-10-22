@@ -8,7 +8,12 @@
     <script src="../Controlador/jquery-2.1.4.js"></script>
     <link rel="stylesheet" href="css/estilo.css">
     <title>CORAPE</title>
+
+  
 </head>
+
+
+      
 
 <?php
 require('../Modelo/conecciones.php');
@@ -28,15 +33,15 @@ $conn->close();
     <div id="cabezera">
         <img src="img/logo-corape-web-repositorio.png" alt="logo">
         <center>
-            <h1>Administración de datos</h1>
+           <h1>Administración de datos</h1>
         </center>
     </div>
-
+<br>
     <center>
         <div id="cuerpo">
             <a href="#popup"><input type="button" name="Añadir" id="Añadir" value="Añadir"></a>&emsp;&emsp;
             <a href="nivel2.php"><input type="button" id="Añadir" value="Nivel  2"></a>&emsp;&emsp;
-            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+            &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
             <label for="searchterm" id="buscar">Buscar:</label> <input id="searchTerm" type="text" onkeyup="doSearch()" name="palabra">
 
 
@@ -44,6 +49,7 @@ $conn->close();
 
             <div id="tabladecomtenidos">
                 <table border="1" id="regTable" name="tablainfo">
+                    <thead>
                     <tr class="tablatitulo">
                         <th>
                             Número
@@ -58,8 +64,7 @@ $conn->close();
                             Acciones
                         </th>
                     </tr>
-
-
+                    
                     <?php
                     //codigo para llenar la tabla html con informacion de las tablas de mysql
                     //crea un ciclo repetitivo usando el while para llenar las tabla con los valores de la DB
@@ -78,6 +83,7 @@ $conn->close();
                         echo "</tr>";
                         $contador++;
                     } ?>
+                    </thead>
                 </table>
             </div>
     </center>

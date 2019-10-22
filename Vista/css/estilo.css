@@ -29,7 +29,6 @@ margin: 20% auto;
 transition: all 5s ease-in-out;
 
 }
-
 #cerrar{
     position: absolute;
 top: 20px;
@@ -41,6 +40,7 @@ color: #F00;
 transition: all 200ms;
 }
 
+/*Aqui empieza la modificacion hecha por nosotros dentro de la interfazz visual de nivel 1 y 2*/
 h1{
     display: inline;
     position: absolute;
@@ -48,32 +48,44 @@ h1{
     left: 30%;
     font-size: 5vw;
 }
-
-
-
 img{
     /* background: white; */
     width: 25%;
     height: 20hv;
 }
 
-body{
-    /* background: greenyellow; */
+/*body{
+     background: greenyellow; 
     background: linear-gradient(120deg,white,#ff8800 25%,#f70e0e 85%); 
+}*/
+
+table td{
+    font-size: 20px;
+    padding: 15px;
+    border-collapse: collapse;
+    /*
+    border-top-style: none;
+    border-left-style: none;
+    border-right-style: none;
+    border-bottom-color: peru;*/
+}
+table th{
+    padding: 15px;
+    background: rgb(255, 238, 0);
+    border-collapse: collapse;
 }
 
 table{
     border-style: outset;
     border-width: 13px;
     border-collapse: separate;
-    border-color: rgb(142, 165, 152);
+    border-spacing: 0;
+    border-color: orange/*rgb(142, 165, 152)*/;
     text-align: center;
     background: #f5f5dc;
-    border-radius: 14px;
+    border-radius: 14px;  
     
 }
-
-
 
 @font-face{
     font-family: "square";
@@ -109,28 +121,22 @@ input{
 }
 
 .tablatitulo{
-    font-family: primaria;
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     
 }
 .tablacontenido{
     font-size: 14px;
-    font-family: square;
+    font-family: Arial, Helvetica, sans-serif;
 }
-td{
-    font-size: 20px;
-    padding: 15px;
-    
-}
-th{
-    padding: 15px;
-}
+
+
 #buscar{
-    font-family: "square";
+    font-family: Arial, Helvetica, sans-serif;
     font-size: 18px;
 }
 label{
-    font-family: square;
+    
     font-size: 14px;
 }
 #retorno{
@@ -152,4 +158,7 @@ button{
     font-size: 22.5px;
     width: 100%;
     height: 100%; 
+}
+#cabezera{
+    background: linear-gradient(120deg,white,#ff8800 25%,#f70e0e 85%);
 }
